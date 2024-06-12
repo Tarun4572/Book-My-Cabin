@@ -17,10 +17,13 @@ export function useBookings() {
   const [field, direction] = sortByRaw.split("-");
   const sortBy = { field, direction };
 
-  const { isLoading, data: bookings } = useQuery({
+  const {
+    isLoading,
+    data: { data: bookings, count },
+  } = useQuery({
     queryKey: ["bookings", filter, sortBy],
     queryFn: () => getBookings({ filter, sortBy }),
   });
 
-  return { isLoading, bookings };
+  return { isLoading, bookings, count };
 }
